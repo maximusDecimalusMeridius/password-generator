@@ -50,6 +50,7 @@ if(pwBuild.lowercase.use || pwBuild.uppercase.use || pwBuild.numbers.use || pwBu
 // The argument passed to Generate Password is the requested password length minus any preloaded
 // characters that meet password make-up requirements
 function GeneratePassword(remainingLetters) {
+
     if (remainingLetters === 0){
         return pwBuild.newPassword;
     }
@@ -90,7 +91,6 @@ function JumblePass(){
     // for loop running for (user selected build length) + (length of the string holding guaranteed characters)
     // fatePicker is assigned 0/1
     for (let j = 0; j < (pwBuild.passwordLength + (pwBuild.guaranteedChars.length)); j++) {
-        console.log(tempArray.length);
 
         if(Math.floor(Math.random() * 2) === 1) {
             randomizedPassword += tempArray.shift();
@@ -99,6 +99,6 @@ function JumblePass(){
             randomizedPassword += tempArray.pop(); console.log("I POPPED!");
         }
     }
-    console.log(pwBuild.newPassword);
-    console.log(randomizedPassword);
+
+    pwBuild.newPassword = randomizedPassword;
 }
