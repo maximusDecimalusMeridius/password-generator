@@ -37,10 +37,6 @@ function OnClick(){
     pwBuild.availableChars = "";
     pwBuild.newPassword = "";
 
-    console.log("Guaranteed: " + pwBuild.guaranteedChars)
-    console.log("Available: " + pwBuild.availableChars)
-    console.log("New Password: " + pwBuild.newPassword)
-
     pwBuild.passwordLength = prompt("Enter your desired password length between 8 and 128")
     if(pwBuild.passwordLength == null){
         return;
@@ -101,7 +97,6 @@ Click OK for 'Yes'`)){
 // Jumble the new password
 function JumblePass(){
     let tempArray = [];
-    console.log("tempArray2 =" + tempArray);
     let randomizedPassword = "";
     pwBuild.newPassword += pwBuild.guaranteedChars;
     
@@ -111,8 +106,6 @@ function JumblePass(){
     for(let i = 0; i < pwBuild.newPassword.length; i++){
         tempArray.push(pwBuild.newPassword.charAt(i));
     }
-
-    console.log("tempArray3 = " + tempArray);
 
     // for loop running for (user selected build length) + (length of the string holding guaranteed characters)
     // fatePicker is assigned 0/1
@@ -129,10 +122,9 @@ function JumblePass(){
     }
     // Set new password and re-initialized tempArray
     pwBuild.newPassword = randomizedPassword;
-    console.log("Guaranteed: " + pwBuild.guaranteedChars)
-    console.log("Available: " + pwBuild.availableChars)
+    console.log("Guaranteed Chars: " + pwBuild.guaranteedChars)
+    console.log("Available Chars: " + pwBuild.availableChars)
     console.log("New Password: " + pwBuild.newPassword)
-    console.log("tempArray =" + tempArray);
 
     //Re-initialize array
     for(index in tempArray){
