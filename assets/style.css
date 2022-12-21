@@ -8,3 +8,23 @@ img, video {
     height: 100%;
     width: 100%;
 }
+
+#box {
+    width: 75%;
+    min-height: 400px;
+    background-color: red;
+    margin: 75px auto 0px auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#password {
+    width: 75%;
+    height: 125px;
+    margin-bottom: 0px;
+    text-align: center;
+    resize: none;
+}
