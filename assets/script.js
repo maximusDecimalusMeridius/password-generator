@@ -1,3 +1,6 @@
+// add event listener to button on site
+document.getElementById("generate").addEventListener("click", OnClick);
+
 // pwBuild object
 var pwBuild = {
     passwordLength: 0,
@@ -28,22 +31,33 @@ var pwBuild = {
 
 //Prompt user for an input, store value in variable
 //If smaller than 8 or larger than 128, prompt again
-do{
+function OnClick(){
+    
     pwBuild.passwordLength = prompt("Enter your desired password length between 8 and 128")
-} while(pwBuild.passwordLength < 8 || pwBuild.passwordLength > 128);
+    if(pwBuild.passwordLength == null){
+        return;
+    }
+    while(!(pwBuild.passwordLength >= 8) && !(pwBuild.passwordLength > 128)){
+        pwBuild.passwordLength = prompt("Enter your desired password length between 8 and 128");
+        if(pwBuild.passwordLength == null){
+            return;
+        }
+    }
 
-// Call InitializeChoice which will prompt user for requirement prefs and act accordingly
-InitializeChoice(pwBuild.lowercase);
-InitializeChoice(pwBuild.uppercase);
-InitializeChoice(pwBuild.specialChars);
-InitializeChoice(pwBuild.numbers);
 
-if(pwBuild.lowercase.use || pwBuild.uppercase.use || pwBuild.numbers.use || pwBuild){
-    GeneratePassword(pwBuild.passwordLength);
-    JumblePass();
-    document.getElementById("password").value = pwBuild.newPassword;
-} else {
-    console.log("Come onnnnnnnn, you have to pick at least ONE!");
+    // Call InitializeChoice which will prompt user for requirement prefs and act accordingly
+    InitializeChoice(pwBuild.lowercase);
+    InitializeChoice(pwBuild.uppercase);
+    InitializeChoice(pwBuild.specialChars);
+    InitializeChoice(pwBuild.numbers);
+
+    if(pwBuild.lowercase.use == false && pwBuild.uppercase.use == false && pwBuild.numbers.use == false && !pwBuild.specialChars.use.NaN){
+        document.getElementById("password").value = "Come onnnnnnnn, you have to pick at least ONE!";
+    } else {
+        GeneratePassword(pwBuild.passwordLength);
+        JumblePass();
+        document.getElementById("password").value = pwBuild.newPassword;
+    }
 }
 
 // Generate a new password by concatenating pwBuild.newPassword
@@ -60,12 +74,13 @@ function GeneratePassword(remainingLetters) {
 }
 
 // Accept user preferences through confirm() dialog pop-ups.  If user selects a characteristic,
-// add its potential values to the availableCharacters string, 
+// it guarantees at least two of those values will be added to the availableCharacters string 
 function InitializeChoice(choice){
     console.log(choice);
     
     if(choice.use = confirm(`Would you like to include ${choice.ID}?
 Click OK for 'Yes'`)){
+        console.log(choice.use);     
         pwBuild.availableCharacters += choice.values;
         for(let i = 0; i < 2; i++){
             pwBuild.guaranteedChars += choice.values.charAt(Math.floor(Math.random() * choice.values.length));
@@ -74,7 +89,7 @@ Click OK for 'Yes'`)){
     }
 }
 
-// Jumble the password
+// Jumble the new password
 function JumblePass(){
     let tempArray = [];
     let randomizedPassword = "";
@@ -99,6 +114,5 @@ function JumblePass(){
             randomizedPassword += tempArray.pop(); console.log("I POPPED!");
         }
     }
-
     pwBuild.newPassword = randomizedPassword;
 }
