@@ -37,7 +37,7 @@ function OnClick(){
     if(pwBuild.passwordLength == null){
         return;
     }
-    while(!(pwBuild.passwordLength >= 8) && !(pwBuild.passwordLength > 128)){
+    while(!(pwBuild.passwordLength >= 8) && !(pwBuild.passwordLength <= 128)){
         pwBuild.passwordLength = prompt("Enter your desired password length between 8 and 128");
         if(pwBuild.passwordLength == null){
             return;
