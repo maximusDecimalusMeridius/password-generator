@@ -84,10 +84,10 @@ function InitializeChoice(choice){
     
     if(choice.use = confirm(`Would you like to include ${choice.ID}?
 Click OK for 'Yes'`)){
-        console.log(choice.use);
+        
         pwBuild.availableChars += choice.values;
+        
         for(let i = 0; i < 2; i++){
-            console.log("Adding stuff");
             pwBuild.guaranteedChars += choice.values.charAt(Math.floor(Math.random() * choice.values.length));
             pwBuild.passwordLength -= 1;
         }
